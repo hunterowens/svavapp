@@ -2,19 +2,42 @@
 <html>
 <head>
     <title>Bathroom Connoisseur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+	<meta name="viewport" content="width=device-width, initial-scale=2.0" />
+	<link href="../static/css/bootstrap.css" rel="stylesheet" media="screen" />
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
 </head>
-<body>
+<body> 
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li><a href="{{ url_for('index') }}"> Home </a></li>
+            </div>
+        </div>
+    </div>
 	<div class="container-fluid">
 		<div class="row-fluid">
             <div id="sidebar" class="span2">
-                {% block sidebar %}{% endblock %}
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        {% block sidebar %}{% endblock %}
+                    </ul>
+                </div>
             </div>
             <div id="content" class="span10">
                 {% block content %}{% endblock %}
             </div>
         </div>
     </div>
+    <script src="http://code.jquery.com/jquery.js" />
+    <script src="../static/js/bootstrap.js" type="text/javascript" />
 </body>
 </html>

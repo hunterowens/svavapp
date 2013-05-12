@@ -15,7 +15,7 @@
     <div class="control-group">
      <label class="control-label">Floor</label>
         <div class="controls">
-             <select id="floor" fl>
+             <select id="floor">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -58,6 +58,7 @@
                     type: 'POST',
                     processData: false,
                     contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
                     success:function(resp) {
                         alert("Succes: Now Go Review the Bathroom");
                     },

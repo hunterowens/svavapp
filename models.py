@@ -10,7 +10,7 @@ Session = sessionmaker()
 Session.configure(bind=engine)
 session = Session()
 
-#Base = declarative_base()
+Base = declarative_base()
 
 class GenderType(DeclEnum):
     female = "female", "Female"
@@ -19,7 +19,7 @@ class GenderType(DeclEnum):
     neither = "neither", "Neither"
     what = "what", "what?"
 
-class Bathroom():
+class Bathroom(Base):
         __tablename__ = 'bathrooms'
         id = Column(Integer, primary_key=True)
         location = Column(String(200))
@@ -27,7 +27,7 @@ class Bathroom():
         gender = Column(GenderType.db_type())
 
 
-class Review():
+class Review(Base):
     __tablename__ = 'reviews'
     id = Column(Integer, primary_key=True)
     content = Column(String(200), nullable=False)

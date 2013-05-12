@@ -6,7 +6,7 @@ import json
 
 
 app = Flask(__name__)
-engine = create_engine("mysql://root:@localhost/Scav")
+engine = create_engine("mysql://root:scavhunt@localhost/Scav")
 
 SessionMkr = sessionmaker()
 SessionMkr.configure(bind=engine)

@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import *
 from EnumSymbol import DeclEnum
 #from hello import engine, session
 
-engine = create_engine("mysql://root:@localhost/Scav")
+engine = create_engine("mysql://root:scavhunt@localhost/Scav")
 
 Session = sessionmaker()
 Session.configure(bind=engine)

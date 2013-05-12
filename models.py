@@ -1,7 +1,14 @@
-from sqlalchemy import Column, Integer, String, Sequence, Enum, ForeignKey
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import *
+from sqlalchemy.orm import *
+from sqlalchemy.ext.declarative import *
 from EnumSymbol import DeclEnum
+#from hello import engine, session
+
+engine = create_engine("mysql://root:scavhunt@localhost/Scav")
+
+Session = sessionmaker()
+Session.configure(bind=engine)
+session = Session()
 
 Base = declarative_base()
 
@@ -13,35 +20,26 @@ class GenderType(DeclEnum):
     what = "what", "what?"
 
 class Bathroom(Base):
-    __tablename__ = "bathrooms"
+        __tablename__ = 'bathrooms'
+        id = Column(Integer, primary_key=True)
+        location = Column(String(200))
+        floor = Column(String(200))
+        gender = Column(GenderType.db_type())
 
-    id = Column(Integer, Sequence("bathroom_id_seq"), primary_key=True)
-    location = Column(String(128))
-    floor = Column(String(128))
-    gender = Column(GenderType.db_type())
 
-    def __init__(self, location, floor, gender):
-        self.location = location
-        self.floor = floor
-        self.gender = gender
-
-    def __repr__(self):
-        return "<Bathroom('%s', '%s', '%s')>" % (self.location, \
-                self.floor, self.gender)
-
-def Review(Base):
-    __tablename__ = "reviews"
-
-    id = Column(Integer, Sequence("review_id_seq"), primary_key=True)
-    bathroom_id = Column(Integer, ForeignKey('bathrooms.id'))
+class Review(Base):
+    __tablename__ = 'reviews'
+    id = Column(Integer, primary_key=True)
+    content = Column(String(200), nullable=False)
     rating = Column(Integer)
-    comment = Column(String(1024))
-
+    bathroom_id = Column(Integer, ForeignKey('bathrooms.id'))
     bathroom = relationship("Bathroom", backref=backref('reviews', order_by=id))
 
-    def __init__(self, rating, comment):
-        self.rating = rating
-        self.comment = comment
+Base.metadata.create_all(engine)
 
-    def __repr__(self):
-        return "<Review('%d', '%s')>" % (self.rating, self.comment)
+bathroom_new = Bathroom(location="harper", floor="1", gender=GenderType.male)
+review_new = Review(content="stuff", rating=3)
+review_new.bathroom = bathroom_new
+session.add(bathroom_new)
+session.add(review_new)
+session.commit()

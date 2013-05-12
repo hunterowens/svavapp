@@ -33,17 +33,22 @@ def show_bath(bath):
 
 @app.route('/addBath',methods=['GET','POST'])
 def add_bath():
-	if request.method == 'POST':
-		data = request.data
-		bathroom = json.loads(data)
-		bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
-		print bathroom_new
-		session.add(bathroom_new)
-		session.commit()
-		print 'we got here'
-		return render_template('bathroomAdded.html')
-	else:
-		return render_template('addBathroomForm.html')
+    if request.method == 'POST':
+        data = request.data
+        bathroom = json.loads(data)
+        #Session = sessionmaker()
+        #Session.configure(bind=engine)
+        #session = Session()
+        print bathroom
+        bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
+        print bathroom_new
+        session.add(bathroom_new)
+        print "added"
+        session.commit()
+        print "committed"
+        return render_template('bathroomAdded.html')
+    else:
+        return render_template('addBathroomForm.html')
 
 @app.route('/addReview')
 def add_review():

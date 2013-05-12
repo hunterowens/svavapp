@@ -43,7 +43,9 @@ def add_bath():
     else:
         return render_template('addBathroomForm.html')
 
-
+@app.route('/addReview')
+def add_review():
+	return render_template('addReviewForm.html')
 
 if __name__ == '__main__':
     app.debug = True

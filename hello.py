@@ -5,7 +5,7 @@ from models import Review, Bathroom
 
 
 app = Flask(__name__)
-engine = create_engine("mysql://root:@localhost/Scav")
+engine = create_engine("mysql://root:scavhunt@localhost/Scav")
 
 SessionMkr = sessionmaker()
 SessionMkr.configure(bind=engine)
@@ -36,9 +36,6 @@ def add_bath():
 		location = request.form['location']
 		floor = request.form['floor']
 		gender = request.form['gender']
-		Session = sessionmaker()
-		Session.configure(bind=engine)
-		session = Session()
 		bathroom_new = Bathroom(location=location, floor=floor, gender=gender)
 		session.add(bathroom_new)
 		session.commit()

@@ -36,13 +36,11 @@ def add_bath():
 	if request.method == 'POST':
 		data = request.data
 		bathroom = json.loads(data)
-		print bathroom['gender']
-		#Session = sessionmaker()
-		#Session.configure(bind=engine)
-		#session = Session()
-		#bathroom_new = Bathroom(location=location, floor=floor, gender=gender)
-		#session.add(bathroom_new)
-		#session.commit()
+		bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
+		print bathroom_new
+		session.add(bathroom_new)
+		session.commit()
+		print 'we got here'
 		return render_template('bathroomAdded.html')
 	else:
 		return render_template('addBathroomForm.html')

@@ -37,7 +37,7 @@ class Review(Base):
 
 #Base.metadata.create_all(engine)
 
-#bathroom_new = Bathroom(location="harper", floor="1", gender=GenderType.male)
+#bathroom_new = Bathroom(location="foster", floor="1", gender=GenderType.male)
 #review_new = Review(content="stuff", rating=3)
 #review_new.bathroom = bathroom_new
 #session.add(bathroom_new)

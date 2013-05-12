@@ -43,7 +43,19 @@ def add_bath():
     else:
         return render_template('addBathroomForm.html')
 
-
+@app.route('/addReview',methods=['GET','POST'])
+def add_review():
+    if request.method = 'POST':
+        data = request.data
+        review = json.loads(data)
+        review_new = Review(content=review['content'], rating=review['rating'])
+        bath = session.query(Bathroom).filter(Bathroom.id == review['bathroom']).all().head()
+        review_new.bathroom = bath
+        session.add(review_new)
+        session.commit()
+        return make_response(render_template('reviewAdded.html'), 200)
+    else:
+        return render_template('addReviewForm.html')
 
 if __name__ == '__main__':
     app.debug = True

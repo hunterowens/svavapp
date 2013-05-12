@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Review, Bathroom
+import json
 
 
 app = Flask(__name__)
@@ -30,11 +31,12 @@ def show_bath(bath):
     print reviews
     return render_template('bath.html', reviews=reviews)
 
-@app.route('/addBath',methods=['POST', 'GET'])
+@app.route('/addBath',methods=['GET','POST'])
 def add_bath():
 	if request.method == 'POST':
-		data = flask.request.data
-		print data
+		data = request.data
+		bathroom = json.loads(data)
+		print bathroom['gender']
 		#Session = sessionmaker()
 		#Session.configure(bind=engine)
 		#session = Session()

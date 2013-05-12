@@ -52,8 +52,9 @@
                 bathroom.floor = floor;
                 bathroom.location = location;
                 bathroom.gender = gender;
+                var bathroomjson = JSON.stringify(bathroom);
                 $.ajax('/addBath', {
-                    data: JSON.stringify.bathroom),
+                    data: bathroomjson,
                     type: 'POST',
                     processData: false,
                     contentType: 'application/json; charset=utf-8',

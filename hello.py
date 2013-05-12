@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Review, Bathroom
@@ -39,14 +39,10 @@ def add_bath():
         #Session = sessionmaker()
         #Session.configure(bind=engine)
         #session = Session()
-        print bathroom
         bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
-        print bathroom_new
         session.add(bathroom_new)
-        print "added"
         session.commit()
-        print "committed"
-        return render_template('bathroomAdded.html')
+        return redirect(url_for('list_reviews'))
     else:
         return render_template('addBathroomForm.html')
 

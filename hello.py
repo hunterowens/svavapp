@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import models
 
 app = Flask(__name__)
 engine = create_engine("mysql://root:scavhunt@localhost/Scav")
@@ -15,12 +16,15 @@ def index():
 
 @app.route('/list')
 def list_reviews():
-    locations = session.query(Bathroom.location).all()
-    reviewsByLoc = {}
-    for location in locations:
-        reviewsByLoc[location] = session.query(Review).filter(Review.bathroom.location == location).all()
+    locations = [instance.location for instance in session.query(models.Bathroom)]
+    print locations
+    bathrooms = session.query(models.Bathroom).all()
+    print bathrooms
+    return render_template('list.html', locs=locations, baths=bathrooms)
 
-    return render_template('list.html', locations=locations, reviews=reviewsByLoc)
+@app.route('/bath/<bath>')
+def show_bath(bath):
+    pass
 
 if __name__ == '__main__':
     app.run()

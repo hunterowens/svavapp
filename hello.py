@@ -6,7 +6,7 @@ import json
 
 
 app = Flask(__name__)
-engine = create_engine("mysql://root:scavhunt@localhost/Scav")
+engine = create_engine("mysql://root:scav@localhost/Scav")
 
 SessionMkr = sessionmaker()
 SessionMkr.configure(bind=engine)
@@ -53,8 +53,8 @@ def add_review():
     if request.method == 'POST':
         data = request.data
         review = json.loads(data)
-        review_new = Review(content=review['content'], rating=review['rating'])
-        bath = session.query(Bathroom).filter(Bathroom.id == review['bathroom']).all().head()
+        review_new = Review(content=review['content'], rating=int(review['rating']))
+        bath = session.query(Bathroom).filter(Bathroom.id == int(review['bathroom'])).first()
         review_new.bathroom = bath
         session.add(review_new)
         session.commit()
@@ -65,4 +65,4 @@ def add_review():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run('0.0.0.0',80)

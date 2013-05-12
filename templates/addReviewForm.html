@@ -11,7 +11,7 @@
         <div class="controls">
              <select id="bathroom">
                  {% for bath in baths %}
-                 <option value="{{ bath.id }}">{{ bath.location }}, {{ bath.floor }}, {{ bath.gender }} </option>
+                 <option value="{{ bath.id }}">Building:{{ bath.location }}, Floor:{{ bath.floor }}, Gender:{{ bath.gender }} </option>
                  {% endfor %}
             </select>
         </div>
@@ -58,10 +58,10 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success:function(resp) {
-                        alert("Succes: Now Go Review the Bathroom");
+                          window.location = '/list';
                     },
                     error:function(xhr, textStatus, errorThrown){
-                        alert("Success: Now write a review");
+        
                         window.location = '/list';
                     }            
                 });

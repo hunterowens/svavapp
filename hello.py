@@ -43,6 +43,7 @@ def add_bath():
     else:
         return render_template('addBathroomForm.html')
 
+<<<<<<< HEAD
 @app.route('/addReview',methods=['GET','POST'])
 def add_review():
     if request.method = 'POST':
@@ -56,6 +57,11 @@ def add_review():
         return make_response(render_template('reviewAdded.html'), 200)
     else:
         return render_template('addReviewForm.html')
+=======
+@app.route('/addReview')
+def add_review():
+	return render_template('addReviewForm.html')
+>>>>>>> 634157da2358a982af2ed4552f39e5a6db3d4608
 
 if __name__ == '__main__':
     app.debug = True

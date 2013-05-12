@@ -4,36 +4,32 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Add A Bathroom</h2>
+    <h2>Add A Review</h2>
     <form class="form-horizontal">
     <div class="control-group">
         <label class="control-label" >Location</label>
         <div class="controls">
-             <input id="location" placeholder="Location" type="text"></input> 
+             <select id="bathroom">
+                <option>A</option>
+            </select>
         </div>
     </div>
-    <div class="control-group">
-     <label class="control-label">Floor</label>
+     <div class="control-group">
+        <label class="control-label" >Score</label>
         <div class="controls">
-             <select id="floor">
+             <select id="rating">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </select> 
+            </select>
         </div>
     </div>
     <div class="control-group">
-     <label class="control-label">Gender</label>
+     <label class="control-label">Review</label>
         <div class="controls">
-             <select id="gender">
-                <option>Male</option>
-                <option>Female</option>
-                <option>Either</option>
-                <option>Neither</option>
-                <option>What?</option>
-        </select>
+             <textarea id="content" rows="3"></textarea>
         </div>
     </div>
     <div class="control-group">
@@ -45,24 +41,27 @@
     <script>
         $(document).ready(function(){
             $('#submit').click(function() {
-                var floor = $('#floor').val();
-                var gender = $('#gender').val();
-                var location = $('#location').val();
-                var bathroom = new Object();
-                bathroom.floor = floor;
-                bathroom.location = location;
-                bathroom.gender = gender;
-                var bathroomjson = JSON.stringify(bathroom);
-                $.ajax('/addBath', {
-                    data: bathroomjson,
+                var bathroom = $('#bathroom').val();
+                var rating = $('#rating').val();
+                var content = $('#content').val();
+                var review = new Object();
+                review.bathroom = bathroom;
+                review.rating = rating;
+                review.content = content;
+                var reviewjson = JSON.stringify(review);
+                $.ajax('/addReview', {
+                    data: review,
                     type: 'POST',
                     processData: false,
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
-                    statusCode: {
-                    500: function(xhr, textStatus, errorThrown) {
-                        alert("page not found");
-                    }                
+                    success:function(resp) {
+                        alert("Succes: Now Go Review the Bathroom");
+                    },
+                    error:function(xhr, textStatus, errorThrown){
+                        alert("Success: Now write a review");
+                        window.location = '/list';
+                    }            
                 });
             });
     });

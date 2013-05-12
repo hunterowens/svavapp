@@ -30,7 +30,7 @@ class Bathroom(Base):
 class Review(Base):
     __tablename__ = 'reviews'
     id = Column(Integer, primary_key=True)
-    content = Column(String(200), nullable=False)
+    content = Column(String(2000), nullable=False)
     rating = Column(Integer)
     bathroom_id = Column(Integer, ForeignKey('bathrooms.id'))
     bathroom = relationship("Bathroom", backref=backref('reviews', order_by=id))

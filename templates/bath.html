@@ -6,10 +6,12 @@
 {% endblock sidebar %}
 
 {% block content %}
+    <div class="hero-unit">
+    <h2>Location: {{ bath.location }}, Floor: {{ bath.floor }}, Gender: {{ bath.gender }} </h2>
+    <hr />
     {% for review in reviews %}
-        <div class="hero-unit">
             <h3>Rating: {{ review.rating }}/5 </h3>
             <p>Review: {{ review.content }} </p>
-        </div>
     {% endfor %}
+</div>
 {% endblock content %}

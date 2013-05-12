@@ -26,8 +26,9 @@ def list_reviews():
 def show_bath(bath):
     print "showing bath " + str(bath)
     reviews = session.query(Review).filter(Review.bathroom_id==bath).all()
+    bath = session.query(Bathroom).filter(Bathroom.id == bath).first()
     print reviews
-    return render_template('bath.html', reviews=reviews)
+    return render_template('bath.html', reviews=reviews, bath=bath)
 
 @app.route('/addBath',methods=['GET','POST'])
 def add_bath():

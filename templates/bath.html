@@ -8,8 +8,8 @@
 {% block content %}
     {% for review in reviews %}
         <div class="hero-unit">
-            <h3> {{ review.rating }} </h3>
-            <p> {{ review.content }} </p>
+            <h3>Rating: {{ review.rating }}/5 </h3>
+            <p>Review: {{ review.content }} </p>
         </div>
     {% endfor %}
 {% endblock content %}

@@ -25,9 +25,17 @@ def list_reviews():
 @app.route('/bath/<bath>')
 def show_bath(bath):
     print "showing bath " + str(bath)
-    reviews = [instance for instance in session.query(Review).filter(Review.bathroom.id == bath)]
+    reviews = session.query(Review).filter(Review.bathroom_id==bath).all()
     print reviews
     return render_template('bath.html', reviews=reviews)
+
+@app.route('/addBath')
+def add_bath():
+    pass
+
+@app.route('/addReview')
+def add_review():
+    pass
 
 if __name__ == '__main__':
     app.run()

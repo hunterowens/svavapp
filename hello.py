@@ -6,7 +6,7 @@ import json
 
 
 app = Flask(__name__)
-engine = create_engine("mysql://root:@localhost/Scav")
+engine = create_engine("mysql://root:scavhunt@localhost/Scav")
 
 SessionMkr = sessionmaker()
 SessionMkr.configure(bind=engine)
@@ -33,19 +33,22 @@ def show_bath(bath):
 
 @app.route('/addBath',methods=['GET','POST'])
 def add_bath():
-	if request.method == 'POST':
-		data = request.data
-		bathroom = json.loads(data)
-		print bathroom['gender']
-		#Session = sessionmaker()
-		#Session.configure(bind=engine)
-		#session = Session()
-		#bathroom_new = Bathroom(location=location, floor=floor, gender=gender)
-		#session.add(bathroom_new)
-		#session.commit()
-		return render_template('bathroomAdded.html')
-	else:
-		return render_template('addBathroomForm.html')
+    if request.method == 'POST':
+        data = request.data
+        bathroom = json.loads(data)
+        #Session = sessionmaker()
+        #Session.configure(bind=engine)
+        #session = Session()
+        print bathroom
+        bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
+        print bathroom_new
+        session.add(bathroom_new)
+        print "added"
+        session.commit()
+        print "committed"
+        return render_template('bathroomAdded.html')
+    else:
+        return render_template('addBathroomForm.html')
 
 @app.route('/addReview')
 def add_review():

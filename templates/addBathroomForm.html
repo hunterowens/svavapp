@@ -60,10 +60,12 @@
                     contentType: 'application/json; charset=utf-8',
                     success:function(resp) {
                         alert("Succes: Now Go Review the Bathroom");
+                    },
+                    error:function(xhr, textStatus, errorThrown){
+                        alert("error, contact a sysadmin");
                     }
                 });
             });
     });
-
     </script>
 {% endblock %}

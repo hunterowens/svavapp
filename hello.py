@@ -33,15 +33,14 @@ def show_bath(bath):
 @app.route('/addBath',methods=['POST', 'GET'])
 def add_bath():
 	if request.method == 'POST':
-		location = request.form['location']
-		floor = request.form['floor']
-		gender = request.form['gender']
-		Session = sessionmaker()
-		Session.configure(bind=engine)
-		session = Session()
-		bathroom_new = Bathroom(location=location, floor=floor, gender=gender)
-		session.add(bathroom_new)
-		session.commit()
+		data = flask.request.data
+		print data
+		#Session = sessionmaker()
+		#Session.configure(bind=engine)
+		#session = Session()
+		#bathroom_new = Bathroom(location=location, floor=floor, gender=gender)
+		#session.add(bathroom_new)
+		#session.commit()
 		return render_template('bathroomAdded.html')
 	else:
 		return render_template('addBathroomForm.html')

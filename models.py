@@ -4,11 +4,11 @@ from sqlalchemy.ext.declarative import *
 from EnumSymbol import DeclEnum
 #from hello import engine, session
 
-engine = create_engine("mysql://root:scavhunt@localhost/Scav")
+#engine = create_engine("mysql://root:scavhunt@localhost/Scav")
 
-Session = sessionmaker()
-Session.configure(bind=engine)
-session = Session()
+#Session = sessionmaker()
+#Session.configure(bind=engine)
+#session = Session()
 
 Base = declarative_base()
 
@@ -35,11 +35,11 @@ class Review(Base):
     bathroom_id = Column(Integer, ForeignKey('bathrooms.id'))
     bathroom = relationship("Bathroom", backref=backref('reviews', order_by=id))
 
-Base.metadata.create_all(engine)
+#Base.metadata.create_all(engine)
 
-bathroom_new = Bathroom(location="harper", floor="1", gender="male")
-review_new = Review(content="stuff", rating=3)
-review_new.bathroom = bathroom_new
-session.add(bathroom_new)
-session.add(review_new)
-session.commit()
+#bathroom_new = Bathroom(location="harper", floor="1", gender="male")
+#review_new = Review(content="stuff", rating=3)
+#review_new.bathroom = bathroom_new
+#session.add(bathroom_new)
+#session.add(review_new)
+#session.commit()

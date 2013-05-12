@@ -19,9 +19,7 @@ def index():
 @app.route('/list')
 def list_reviews():
     locations = [instance.location for instance in session.query(Bathroom)]
-    print locations
     bathrooms = session.query(Bathroom).all()
-    print bathrooms
     return render_template('list.html', locs=locations, baths=bathrooms)
 
 @app.route('/bath/<bath>')
@@ -36,17 +34,22 @@ def add_bath():
     if request.method == 'POST':
         data = request.data
         bathroom = json.loads(data)
+        loc = bathroom['location']
+        floor = bathroom['floor']
+        gender = bathroom['gender']
+        bathrooms = session.query(Bathroom).filter(Bathroom.location == loc, Bathroom.floor == floor, Bathroom.gender == gender).all()
         bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
-        session.add(bathroom_new)
-        session.commit()
+        if len(bathrooms) == 0:
+            print len(bathrooms)
+            session.add(bathroom_new)
+            session.commit()
         return make_response(render_template('bathroomAdded.html'),200)
     else:
         return render_template('addBathroomForm.html')
 
-<<<<<<< HEAD
 @app.route('/addReview',methods=['GET','POST'])
 def add_review():
-    if request.method = 'POST':
+    if request.method == 'POST':
         data = request.data
         review = json.loads(data)
         review_new = Review(content=review['content'], rating=review['rating'])
@@ -56,12 +59,8 @@ def add_review():
         session.commit()
         return make_response(render_template('reviewAdded.html'), 200)
     else:
-        return render_template('addReviewForm.html')
-=======
-@app.route('/addReview')
-def add_review():
-	return render_template('addReviewForm.html')
->>>>>>> 634157da2358a982af2ed4552f39e5a6db3d4608
+        baths = session.query(Bathroom).all()
+        return render_template('addReviewForm.html', baths=baths)
 
 if __name__ == '__main__':
     app.debug = True

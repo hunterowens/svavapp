@@ -10,7 +10,9 @@
         <label class="control-label" >Location</label>
         <div class="controls">
              <select id="bathroom">
-                <option>A</option>
+                 {% for bath in baths %}
+                 <option value="{{ bath.id }}">{{ bath.location }}, {{ bath.floor }}, {{ bath.gender }} </option>
+                 {% endfor %}
             </select>
         </div>
     </div>

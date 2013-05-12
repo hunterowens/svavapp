@@ -4,13 +4,13 @@ from sqlalchemy.ext.declarative import *
 from EnumSymbol import DeclEnum
 #from hello import engine, session
 
-#engine = create_engine("mysql://root:scavhunt@localhost/Scav")
+engine = create_engine("mysql://root:@localhost/Scav")
 
-#Session = sessionmaker()
-#Session.configure(bind=engine)
-#session = Session()
+Session = sessionmaker()
+Session.configure(bind=engine)
+session = Session()
 
-Base = declarative_base()
+#Base = declarative_base()
 
 class GenderType(DeclEnum):
     female = "female", "Female"
@@ -19,7 +19,7 @@ class GenderType(DeclEnum):
     neither = "neither", "Neither"
     what = "what", "what?"
 
-class Bathroom(Base):
+class Bathroom():
         __tablename__ = 'bathrooms'
         id = Column(Integer, primary_key=True)
         location = Column(String(200))
@@ -27,7 +27,7 @@ class Bathroom(Base):
         gender = Column(GenderType.db_type())
 
 
-class Review(Base):
+class Review():
     __tablename__ = 'reviews'
     id = Column(Integer, primary_key=True)
     content = Column(String(200), nullable=False)

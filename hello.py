@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, make_response
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Review, Bathroom
@@ -39,15 +39,12 @@ def add_bath():
         bathroom_new = Bathroom(location=bathroom['location'], floor=bathroom['floor'], gender=bathroom['gender'])
         session.add(bathroom_new)
         session.commit()
-        return render_template('bathroomAdded.html')
+        return make_response(render_template('bathroomAdded.html'),200)
     else:
         return render_template('addBathroomForm.html')
 
-@app.route('/addReview',methods=['GET','POST'])
-def add_review():
-    if request.method == 'POST':
-   	else:
-        return render_template('addReviewForm.html')
+
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()

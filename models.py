@@ -12,6 +12,12 @@ session = Session()
 
 Base = declarative_base()
 
+class GenderType(DeclEnum):
+    female = "female", "Female"
+    male = "male", "Male"
+    either = "either", "Either"
+    neither = "neither", "Neither"
+    what = "what", "what?"
 
 class Bathroom(Base):
         __tablename__ = 'bathrooms'
@@ -30,7 +36,6 @@ class Review(Base):
     bathroom = relationship("Bathroom", backref=backref('reviews', order_by=id))
 
 Base.metadata.create_all(engine)
-
 
 bathroom_new = Bathroom(location="harper", floor="1", gender="male")
 review_new = Review(content="stuff", rating=3)

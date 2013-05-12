@@ -59,12 +59,10 @@
                     processData: false,
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
-                    success:function(resp) {
-                        alert("Succes: Now Go Review the Bathroom");
-                    },
-                    error:function(xhr, textStatus, errorThrown){
-                        alert("error, contact a sysadmin");
-                    }
+                    statusCode: {
+                    500: function(xhr, textStatus, errorThrown) {
+                        alert("page not found");
+                    }                
                 });
             });
     });

@@ -63,7 +63,8 @@
                         alert("Succes: Now Go Review the Bathroom");
                     },
                     error:function(xhr, textStatus, errorThrown){
-                        alert("error, contact a sysadmin");
+                        alert("Success: Now write a review");
+                        window.location = '/list';
                     }
                 });
             });
